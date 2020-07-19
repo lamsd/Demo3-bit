@@ -213,14 +213,14 @@ namespace startbit {
     //% weight=100 blockId=startbit_Init block="Initialize Startbit" group="0. Set up."
     export function startbit_Init() {
         startbit_initRGBLight();
-        // serial.redirect(
-        //     SerialPin.P12,
-        //     SerialPin.P8,
-        //     BaudRate.BaudRate115200);
+        serial.redirect(
+            SerialPin.P12,
+            SerialPin.P8,
+            BaudRate.BaudRate115200);
 
-        basic.forever(() => {
-            getHandleCmd();
-        });
+        // basic.forever(() => {
+        //     getHandleCmd();
+        // });
         basic.pause(2000);
     }
 
