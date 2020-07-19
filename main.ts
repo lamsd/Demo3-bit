@@ -122,63 +122,63 @@ namespace startbit {
         port2 = 0x02
     }
 	
-    // export enum startbit_CmdType {
-    //     //% block="Invalid command"
-    //     NO_COMMAND = 0,
-    //     //% block="car run"
-    //     CAR_RUN = 1,
-	//     //% block="robot run"   
-	//     ROBOT_RUN = 1,
-    //     //% block="Servo"
-    //     SERVO = 2,
-    //     //% block="Ultrasonic distance"
-    //     ULTRASONIC = 3,
-    //     //% block="Temperature"
-    //     TEMPERATURE = 4,
-    //     //% block="Sound"
-    //     SOUND = 5,
-    //     //% block="Light"
-    //     LIGHT = 6,
-    //     //% block="Voltage"
-    //     BAT = 7,
-    //     //% block="Rgb light"
-    //     RGB_LIGHT = 8,
-    //     //% block="Honk horn"
-    //     DIDI = 9,
-    //     //% block="Read firmware version"
-    //     VERSION = 10,
-    //     //% block="Read angle"
-    //     READ_ANGLE = 11,
-    //     //% block="Light belt"        
-    //     RGB_BELT = 12,
-    //     //% block="WIFI mode"
-    //     WIFI_MODE = 13,
-    //     //% block="Get mac"
-    //     GET_MAC = 14,
-    //     //% block="Get hand cmd"
-    //     GET_HAND_CMD = 15
-    //  }
+    export enum startbit_CmdType {
+        //% block="Invalid command"
+        NO_COMMAND = 0,
+        //% block="car run"
+        CAR_RUN = 1,
+	    //% block="robot run"   
+	    ROBOT_RUN = 1,
+        //% block="Servo"
+        SERVO = 2,
+        //% block="Ultrasonic distance"
+        ULTRASONIC = 3,
+        //% block="Temperature"
+        TEMPERATURE = 4,
+        //% block="Sound"
+        SOUND = 5,
+        //% block="Light"
+        LIGHT = 6,
+        //% block="Voltage"
+        BAT = 7,
+        //% block="Rgb light"
+        RGB_LIGHT = 8,
+        //% block="Honk horn"
+        DIDI = 9,
+        //% block="Read firmware version"
+        VERSION = 10,
+        //% block="Read angle"
+        READ_ANGLE = 11,
+        //% block="Light belt"        
+        RGB_BELT = 12,
+        //% block="WIFI mode"
+        WIFI_MODE = 13,
+        //% block="Get mac"
+        GET_MAC = 14,
+        //% block="Get hand cmd"
+        GET_HAND_CMD = 15
+     }
 
-    // export enum startbit_CarRunCmdType {
-    //     //% block="Stop"
-    //     STOP = 0,
-    //     //% block="Go ahead"
-    //     GO_AHEAD,
-    //     //% block="Back"
-    //     GO_BACK,
-    //     //% block="Turn left"
-    //     TURN_LEFT,
-    //     //% block="Turn right"
-    //     TURN_RIGHT,
-    //     //% block="Go ahead slowly"
-    //     GO_AHEAD_SLOW,
-    //     //% block="Turn left slowly"
-    //     TURN_LEFT_SLOW,
-    //     //% block="Turn right slowly"
-    //     TURN_RIGHT_SLOW,
-    //     //% block="Invalid command"
-    //     COMMAND_ERRO
-    // }
+    export enum startbit_CarRunCmdType {
+        //% block="Stop"
+        STOP = 0,
+        //% block="Go ahead"
+        GO_AHEAD,
+        //% block="Back"
+        GO_BACK,
+        //% block="Turn left"
+        TURN_LEFT,
+        //% block="Turn right"
+        TURN_RIGHT,
+        //% block="Go ahead slowly"
+        GO_AHEAD_SLOW,
+        //% block="Turn left slowly"
+        TURN_LEFT_SLOW,
+        //% block="Turn right slowly"
+        TURN_RIGHT_SLOW,
+        //% block="Invalid command"
+        COMMAND_ERRO
+    }
 
     export enum I2C_ADDR {
         //% block="0x27"
@@ -218,9 +218,9 @@ namespace startbit {
         //     SerialPin.P8,
         //     BaudRate.BaudRate115200);
 
-        // basic.forever(() => {
-        //     getHandleCmd();
-        // });
+        basic.forever(() => {
+            getHandleCmd();
+        });
         basic.pause(2000);
     }
 
@@ -252,162 +252,162 @@ namespace startbit {
     let TM1640_CMD3 = 0x80;
     let _SEGMENTS = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71];
 	
-    // /**
-    // * Get the handle command.
-    // */
-    // function getHandleCmd() {
-    //     let charStr: string = serial.readString();
-    //     handleCmd = handleCmd.concat(charStr);
-    //     let cnt: number = countChar(handleCmd, "$");
-    //     if (cnt == 0)
-    //         return;
-    //     let index = findIndexof(handleCmd, "$", 0);
-    //     if (index != -1) {
-    //         let cmd: string = handleCmd.substr(0, index);
-    //         if (cmd.charAt(0).compare("A") == 0) {
-    //             if (cmd.length == 7) {
-    //                 let arg1Int: number = strToNumber(cmd.substr(1, 2));
-    //                 let arg2Int: number = strToNumber(cmd.substr(3, 2));
-    //                 let arg3Int: number = strToNumber(cmd.substr(5, 2));
+    /**
+    * Get the handle command.
+    */
+    function getHandleCmd() {
+        let charStr: string = serial.readString();
+        handleCmd = handleCmd.concat(charStr);
+        let cnt: number = countChar(handleCmd, "$");
+        if (cnt == 0)
+            return;
+        let index = findIndexof(handleCmd, "$", 0);
+        if (index != -1) {
+            let cmd: string = handleCmd.substr(0, index);
+            if (cmd.charAt(0).compare("A") == 0) {
+                if (cmd.length == 7) {
+                    let arg1Int: number = strToNumber(cmd.substr(1, 2));
+                    let arg2Int: number = strToNumber(cmd.substr(3, 2));
+                    let arg3Int: number = strToNumber(cmd.substr(5, 2));
 
-    //                 P14_ad = arg1Int;
+                    P14_ad = arg1Int;
 
-    //                 if (arg3Int != -1) {
-    //                     currentVoltage = arg3Int * 10353 / 400;
-    //                     currentVoltage = Math.round(currentVoltage);
-    //                 }
+                    if (arg3Int != -1) {
+                        currentVoltage = arg3Int * 10353 / 400;
+                        currentVoltage = Math.round(currentVoltage);
+                    }
 
-    //                 if (arg2Int != -1) {
-    //                     volume = arg2Int;
-    //                 }
-    //             } else if (cmd.length == 5) {
-    //                 actiongroup_finished = true;
-    //             } else {
+                    if (arg2Int != -1) {
+                        volume = arg2Int;
+                    }
+                } else if (cmd.length == 5) {
+                    actiongroup_finished = true;
+                } else {
 
-    //             }
-    //         }
-    //         if (cmd.charAt(0).compare("C") == 0 && cmd.length == 11) {
-    //             if (lhRGBLightBelt != null) {
-    //                 for (let i = 0; i < 10; i++) {
-    //                     let color = converOneChar(cmd.charAt(i + 1));
-    //                     if (color != -1)
-    //                         lhRGBLightBelt.setBeltPixelColor(i, color);
-    //                 }
-    //                 lhRGBLightBelt.show();
-    //             }
-    //         }
-    //         if (cmd.charAt(0).compare("M") == 0 && cmd.length == 18) {
-    //             macStr = cmd.substr(1, 17);
-    //             control.raiseEvent(MESSAGE_MAC, 1);
-    //         }
-    //         if (cmd.compare("WIFI_S_CONNECT") == 0) {
-    //             connectStatus = true;
-    //         }
-    //         if (cmd.compare("WIFI_S_DISCONNECT") == 0) {
-    //             connectStatus = false;
-    //         }
-    //         if (cmd.charAt(0).compare("S") == 0 && cmd.length == 5) {
-    //             let arg1Int: number = strToNumber(cmd.substr(1, 1));
-    //             let arg2Str = cmd.substr(2, 3);
-    //             if (arg2Str.compare("XXX") == 0) {
-    //                 return;
-    //             }
-    //             let arg2Int: number = 0;
-    //             if (arg2Str.charAt(0).compare("F") != 0) {
-    //                 arg2Int = strToNumber(arg2Str);
-    //             }
-    //             if (arg2Int > 1000)
-    //                 arg2Int = 1000;
-    //             if (arg1Int == 1) {
-    //                 servo1Angle = mapRGB(arg2Int, 0, 1000, 0, 240);
-    //                 servo1Angle -= 120;
-    //                 control.raiseEvent(MESSAGE_ANGLE, 1);
-    //             }
-    //             else if (arg1Int == 2) {
-    //                 servo2Angle = mapRGB(arg2Int, 0, 1000, 0, 240);
-    //                 servo2Angle -= 120;
-    //                 control.raiseEvent(MESSAGE_ANGLE, 2);
-    //             }
-    //         }
-    //     }
-    //     handleCmd = "";
-    // }
+                }
+            }
+            if (cmd.charAt(0).compare("C") == 0 && cmd.length == 11) {
+                if (lhRGBLightBelt != null) {
+                    for (let i = 0; i < 10; i++) {
+                        let color = converOneChar(cmd.charAt(i + 1));
+                        if (color != -1)
+                            lhRGBLightBelt.setBeltPixelColor(i, color);
+                    }
+                    lhRGBLightBelt.show();
+                }
+            }
+            if (cmd.charAt(0).compare("M") == 0 && cmd.length == 18) {
+                macStr = cmd.substr(1, 17);
+                control.raiseEvent(MESSAGE_MAC, 1);
+            }
+            if (cmd.compare("WIFI_S_CONNECT") == 0) {
+                connectStatus = true;
+            }
+            if (cmd.compare("WIFI_S_DISCONNECT") == 0) {
+                connectStatus = false;
+            }
+            if (cmd.charAt(0).compare("S") == 0 && cmd.length == 5) {
+                let arg1Int: number = strToNumber(cmd.substr(1, 1));
+                let arg2Str = cmd.substr(2, 3);
+                if (arg2Str.compare("XXX") == 0) {
+                    return;
+                }
+                let arg2Int: number = 0;
+                if (arg2Str.charAt(0).compare("F") != 0) {
+                    arg2Int = strToNumber(arg2Str);
+                }
+                if (arg2Int > 1000)
+                    arg2Int = 1000;
+                if (arg1Int == 1) {
+                    servo1Angle = mapRGB(arg2Int, 0, 1000, 0, 240);
+                    servo1Angle -= 120;
+                    control.raiseEvent(MESSAGE_ANGLE, 1);
+                }
+                else if (arg1Int == 2) {
+                    servo2Angle = mapRGB(arg2Int, 0, 1000, 0, 240);
+                    servo2Angle -= 120;
+                    control.raiseEvent(MESSAGE_ANGLE, 2);
+                }
+            }
+        }
+        handleCmd = "";
+    }
 
 
 
-    // function findIndexof(src: string, strFind: string, startIndex: number): number {
-    //     for (let i = startIndex; i < src.length; i++) {
-    //         if (src.charAt(i).compare(strFind) == 0) {
-    //             return i;
-    //         }
-    //     }
-    //     return -1;
-    // }
+    function findIndexof(src: string, strFind: string, startIndex: number): number {
+        for (let i = startIndex; i < src.length; i++) {
+            if (src.charAt(i).compare(strFind) == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
-    // function countChar(src: string, strFind: string): number {
-    //     let cnt: number = 0;
-    //     for (let i = 0; i < src.length; i++) {
-    //         if (src.charAt(i).compare(strFind) == 0) {
-    //             cnt++;
-    //         }
-    //     }
-    //     return cnt;
-    // }
+    function countChar(src: string, strFind: string): number {
+        let cnt: number = 0;
+        for (let i = 0; i < src.length; i++) {
+            if (src.charAt(i).compare(strFind) == 0) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
 
-    // function strToNumber(str: string): number {
-    //     let num: number = 0;
-    //     for (let i = 0; i < str.length; i++) {
-    //         let tmp: number = converOneChar(str.charAt(i));
-    //         if (tmp == -1)
-    //             return -1;
-    //         if (i > 0)
-    //             num *= 16;
-    //         num += tmp;
-    //     }
-    //     return num;
-    // }
+    function strToNumber(str: string): number {
+        let num: number = 0;
+        for (let i = 0; i < str.length; i++) {
+            let tmp: number = converOneChar(str.charAt(i));
+            if (tmp == -1)
+                return -1;
+            if (i > 0)
+                num *= 16;
+            num += tmp;
+        }
+        return num;
+    }
 
-    // function decStrToNumber(str: string): number {
-    //     let num: number = 0;
-    //     for (let i = 0; i < str.length; i++) {
-    //         let tmp: number = converOneChar(str.charAt(i));
-    //         if (tmp == -1)
-    //             return -1;
-    //         if (i > 0)
-    //             num *= 10;
-    //         num += tmp;
-    //     }
-    //     return num;
-    // }
+    function decStrToNumber(str: string): number {
+        let num: number = 0;
+        for (let i = 0; i < str.length; i++) {
+            let tmp: number = converOneChar(str.charAt(i));
+            if (tmp == -1)
+                return -1;
+            if (i > 0)
+                num *= 10;
+            num += tmp;
+        }
+        return num;
+    }
 
-    // function converOneChar(str: string): number {
-    //     if (str.compare("0") >= 0 && str.compare("9") <= 0) {
-    //         return parseInt(str);
-    //     }
-    //     else if (str.compare("A") >= 0 && str.compare("F") <= 0) {
-    //         if (str.compare("A") == 0) {
-    //             return 10;
-    //         }
-    //         else if (str.compare("B") == 0) {
-    //             return 11;
-    //         }
-    //         else if (str.compare("C") == 0) {
-    //             return 12;
-    //         }
-    //         else if (str.compare("D") == 0) {
-    //             return 13;
-    //         }
-    //         else if (str.compare("E") == 0) {
-    //             return 14;
-    //         }
-    //         else if (str.compare("F") == 0) {
-    //             return 15;
-    //         }
-    //         return -1;
-    //     }
-    //     else
-    //         return -1;
-    // }
+    function converOneChar(str: string): number {
+        if (str.compare("0") >= 0 && str.compare("9") <= 0) {
+            return parseInt(str);
+        }
+        else if (str.compare("A") >= 0 && str.compare("F") <= 0) {
+            if (str.compare("A") == 0) {
+                return 10;
+            }
+            else if (str.compare("B") == 0) {
+                return 11;
+            }
+            else if (str.compare("C") == 0) {
+                return 12;
+            }
+            else if (str.compare("D") == 0) {
+                return 13;
+            }
+            else if (str.compare("E") == 0) {
+                return 14;
+            }
+            else if (str.compare("F") == 0) {
+                return 15;
+            }
+            return -1;
+        }
+        else
+            return -1;
+    }
 
     /**
     * Set the angle of servo 1 to 6, range of 0~270 degree
