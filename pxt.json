@@ -1,6 +1,6 @@
 {
     "name": "Demoo",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "Blocks for Kidkul Micro:bit",
     "license": "MIT",
     "dependencies": {
